@@ -1,0 +1,26 @@
+[
+    {
+        "id": 1,
+        "name": "Arroz",
+        "brand": "Costeño",
+        "quantity": "1Kg",
+        "price": 5,
+        "img": "rice.jpg"
+    },
+    {
+        "id": 2,
+        "name": "Azucar",
+        "brand": "Cartavio",
+        "quantity": "1Kg",
+        "price": 4,
+        "img": "sugar.jpg"
+    },
+    {
+        "id": 3,
+        "name": "Aceite",
+        "brand": "Primor",
+        "quantity": "1Lt",
+        "price": 9,
+        "img": "oil.jpg"
+    }
+]
