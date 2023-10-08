@@ -25,19 +25,6 @@ class ProductListWidgetState extends State<ProductListWidget> {
   }
 
   @override
-// Widget build(BuildContext context) {
-
-//   return ListView.builder(
-//     itemCount: products.length,
-//     itemBuilder: (context, index) {
-//       return ListTile(
-//         title: Text(products[index].name),
-//         // You can customize how each item is displayed here
-//       );
-//     },
-//   );
-// }
-
   Widget build(BuildContext context) {
     return ListView.separated(
         itemCount: products.length,
@@ -48,9 +35,9 @@ class ProductListWidgetState extends State<ProductListWidget> {
             tileColor: Colors.white,
             onTap: () {},
             leading: Image.asset(
-              'assets/images/${products[index].img}', // Path to the image asset
-              width: 40, // Set the desired width for the image
-              height: 40, // Set the desired height for the image
+              'assets/images/${products[index].img}',
+              width: 40,
+              height: 40,
             ),
             trailing: Text('S/ ${products[index].price.toStringAsFixed(2)}'),
           );
@@ -60,26 +47,3 @@ class ProductListWidgetState extends State<ProductListWidget> {
             ));
   }
 }
-
-
-// class ListviewProducts extends StatelessWidget {
-//   const ListviewProducts({Key? key}) : super(key: key);
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return ListView.separated(
-//       itemCount: 5,
-//       itemBuilder: (BuildContext context, int index) {
-//         return ListTile(
-//           title: const Text('Flutter Mapp'),
-//           tileColor: Colors.green,
-//           onTap: () {},
-//           leading: const Icon(Icons.person),
-//         );
-//       },
-//       separatorBuilder: (BuildContext context, int index) => const Divider(
-//         color: Colors.white,
-//       ),
-//     );
-//   }
-// }

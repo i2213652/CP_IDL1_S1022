@@ -11,7 +11,7 @@ class AppBarProducts extends StatelessWidget {
         title: const Text(
           'Mi Bodega Digital',
           style: TextStyle(
-            color: Colors.black, // Text color
+            color: Colors.black,
           ),
         ),
         backgroundColor: Colors.white,
@@ -20,27 +20,17 @@ class AppBarProducts extends StatelessWidget {
         children: <Widget>[
           Container(
             padding: const EdgeInsets.only(left: 16.0),
-            height: 100.0, // Set the desired height
-            color: Colors.green, // Background color of the container
-            // child: const Center(
-            //   child: Text(
-            //     'Lista de productos',
-            //     style: TextStyle(
-            //       fontSize: 24.0,
-            //       color: Colors.white,
-            //     ),
-            //   ),
-            // ),
-
+            height: 100.0,
+            color: Colors.green,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
                 const Text('Lista de productos',
                     style: TextStyle(color: Colors.white, fontSize: 20)),
                 Image.asset(
-                  'assets/images/shopping_car.png', // Path to the image asset
-                  width: 100.0, // Set the desired width for the image
-                  height: 100.0, // Set the desired height for the image
+                  'assets/images/shopping_car.png',
+                  width: 100.0,
+                  height: 100.0,
                 ),
               ],
             ),
