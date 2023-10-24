@@ -5,7 +5,9 @@
         "brand": "Costeño",
         "quantity": "1Kg",
         "price": 5,
-        "img": "rice.jpg"
+        "img": "rice.jpg",
+        "stock": 7,
+        "inCar":0
     },
     {
         "id": 2,
@@ -13,7 +15,9 @@
         "brand": "Cartavio",
         "quantity": "1Kg",
         "price": 4,
-        "img": "sugar.jpg"
+        "img": "sugar.jpg",
+        "stock": 3,
+        "inCar":0
     },
     {
         "id": 3,
@@ -21,6 +25,8 @@
         "brand": "Primor",
         "quantity": "1Lt",
         "price": 9,
-        "img": "oil.jpg"
+        "img": "oil.jpg",
+        "stock": 5,
+        "inCar":0
     }
 ]

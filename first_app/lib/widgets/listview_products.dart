@@ -13,7 +13,8 @@ class ProductListWidget extends StatefulWidget {
 
 class ProductListWidgetState extends State<ProductListWidget> {
   List<Product> products = [];
-  List<String> items = ['Item 1', 'Item 2', 'Item 3', 'Item 4'];
+  List<Product> products_car = [];
+
   @override
   void initState() {
     super.initState();
@@ -21,6 +22,47 @@ class ProductListWidgetState extends State<ProductListWidget> {
       setState(() {
         this.products = products;
       });
+    });
+  }
+
+  void incrementValue(int id) {
+    setState(() {
+      for (int i = 0; i < products.length; i++) {
+        if (products[i].id == id) {
+          if (products[i].inCar + 1 > products[i].stock) {
+            products[i].inCar = products[i].stock;
+          } else {
+            products[i].inCar += 1;
+          }
+          break;
+        }
+      }
+    });
+  }
+
+  void decrementValue(int id) {
+    setState(() {
+      for (int i = 0; i < products.length; i++) {
+        if (products[i].id == id) {
+          if (products[i].inCar - 1 < 0) {
+            products[i].inCar = 0;
+          } else {
+            products[i].inCar -= 1;
+          }
+          break;
+        }
+      }
+    });
+  }
+
+  void addCar(int id) {
+    setState(() {
+      for (int i = 0; i < products.length; i++) {
+        if (products[i].id == id) {
+          products_car.add(products[i]);
+          break;
+        }
+      }
     });
   }
 
@@ -79,42 +121,57 @@ class ProductListWidgetState extends State<ProductListWidget> {
               child: SizedBox(
                   width: 200,
                   child: Column(mainAxisSize: MainAxisSize.min, children: [
-                    Row(children: [Text(products[index].name)]),
+                    Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+                      Text(
+                        'S/ ' + products[index].price.toStringAsFixed(2),
+                      )
+                    ]),
                     Row(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        ElevatedButton(
-                          onPressed: () {
-                            // Acción para el botón
-                          },
-                          child: Icon(Icons.add, size: 15.0),
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.green,
-                            minimumSize: Size(30, 30), // Cambia el tamaño aquí
-                          ),
-                        ),
                         IconButton(
                           icon: const Icon(Icons.add),
                           onPressed: () {
-                            // Acción para el botón de aumento
+                            incrementValue(products[index].id);
                           },
                         ),
                         SizedBox(
                           width: 30,
-                          child: TextField(
-                            decoration: InputDecoration(
-                              hintText: '0',
-                            ),
-                            keyboardType: TextInputType.number,
-                            textAlign: TextAlign.center,
-                          ),
+                          child: Center(
+                              child: Text(
+                            products[index].inCar.toString(),
+                          )),
                         ),
                         IconButton(
-                          icon: Icon(Icons.remove),
+                          icon: const Icon(Icons.remove),
                           onPressed: () {
-                            // Acción para el botón de disminución
+                            decrementValue(products[index].id);
                           },
                         ),
+                        ElevatedButton(
+                          onPressed: () {
+                            Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (context) => Pantalla2(),
+                              ),
+                            );
+                          },
+                          child: Icon(Icons.shopping_cart, size: 15.0),
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.green,
+                            minimumSize: Size(30, 30),
+                          ),
+                        ),
+                        Text(products[index].inCar.toString(),
+                            style: const TextStyle(
+                                color: Colors.black,
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold,
+                                fontStyle: FontStyle.italic,
+                                letterSpacing: 2.0,
+                                wordSpacing: 5.0,
+                                backgroundColor:
+                                    Color.fromARGB(209, 204, 202, 202)))
                       ],
                     )
                   ]))),
@@ -122,6 +179,7 @@ class ProductListWidgetState extends State<ProductListWidget> {
       },
     );
   }
+
   // Widget build(BuildContext context) {
   //   return ListView.separated(
   //       itemCount: products.length,
@@ -167,4 +225,18 @@ class ProductListWidgetState extends State<ProductListWidget> {
   //             color: Colors.white,
   //           ));
   // }
+}
+
+class Pantalla2 extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Carrito de compras'),
+      ),
+      body: Center(
+        child: Text('Estás en Pantalla 2'),
+      ),
+    );
+  }
 }
