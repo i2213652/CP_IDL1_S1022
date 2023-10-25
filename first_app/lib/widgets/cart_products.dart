@@ -15,7 +15,7 @@ class CartProductsWidget extends StatefulWidget {
 
 class CartProductsWidgetState extends State<CartProductsWidget> {
   List<Product> productsCart = [];
-  int total = 0;
+  double total = 0;
 
   @override
   void initState() {
@@ -122,8 +122,8 @@ class CartProductsWidgetState extends State<CartProductsWidget> {
           },
         )),
         const Divider(
-          color: Colors
-              .black, // Cambia el color de la línea según tus preferencias
+          color:
+              Colors.blue, // Cambia el color de la línea según tus preferencias
           thickness: 2.0, // Cambia el grosor de la línea según tus preferencias
         ),
         Row(
@@ -139,7 +139,12 @@ class CartProductsWidgetState extends State<CartProductsWidget> {
                   fontSize: 25,
                 ))
           ],
-        )
+        ),
+        const Divider(
+          color:
+              Colors.blue, // Cambia el color de la línea según tus preferencias
+          thickness: 2.0, // Cambia el grosor de la línea según tus preferencias
+        ),
       ]),
     );
   }
