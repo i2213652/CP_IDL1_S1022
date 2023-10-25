@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:first_app/widgets/listview_products.dart';
 
 class AppBarProducts extends StatelessWidget {
-  const AppBarProducts({Key? key}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(

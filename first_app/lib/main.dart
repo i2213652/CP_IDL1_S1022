@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import 'package:first_app/widgets/appbar_products.dart';
 
 void main() => runApp(const MyApp());
@@ -14,7 +13,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const AppBarProducts(),
+      home: AppBarProducts(),
     );
   }
 }
