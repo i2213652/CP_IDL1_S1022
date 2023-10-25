@@ -29,35 +29,36 @@ class CartProductsWidgetState extends State<CartProductsWidget> {
   }
 
   void deleteAll() {
-    setState(() {
-      showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return AlertDialog(
-            title: const Text('¡Vaciar todo el carrito!'),
-            content: const Text('¿Desea continuar?'),
-            actions: <Widget>[
-              TextButton(
-                child: const Text('Si'),
-                onPressed: () {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('¡Vaciar todo el carrito!'),
+          content: const Text('¿Desea continuar?'),
+          actions: <Widget>[
+            TextButton(
+              child: const Text('Si'),
+              onPressed: () {
+                setState(() {
                   productsCart = [];
                   total = 0;
                   widget.updateCart(productsCart);
+                });
 
-                  Navigator.of(context).pop(); // Cierra la alerta
-                },
-              ),
-              TextButton(
-                child: const Text('No'),
-                onPressed: () {
-                  Navigator.of(context).pop(); // Cierra la alerta
-                },
-              ),
-            ],
-          );
-        },
-      );
-    });
+                Navigator.of(context).pop();
+                Navigator.of(context).pop(); // Cierra la alerta
+              },
+            ),
+            TextButton(
+              child: const Text('No'),
+              onPressed: () {
+                return Navigator.of(context).pop(); // Cierra la alerta
+              },
+            ),
+          ],
+        );
+      },
+    );
   }
 
   @override
