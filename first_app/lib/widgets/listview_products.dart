@@ -88,97 +88,113 @@ class ProductListWidgetState extends State<ProductListWidget> {
     });
   }
 
+  void updateItemCart(List<Product> updatedCart) {
+    setState(() {
+      productsCart = updatedCart;
+      for (var element in products) {
+        element.inCar = 0;
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(children: <Widget>[
-      Expanded(
-          child: ListView.builder(
-        itemCount: products.length,
-        itemBuilder: (BuildContext context, int index) {
-          return ListTile(
-            // contentPadding: EdgeInsets.only(bottom: 0.0),
-            title: Text(products[index].name),
-            subtitle:
-                Text('${products[index].brand} ${products[index].quantity}'),
-            isThreeLine: true,
+      SizedBox(
+          height: 350,
+          child: Expanded(
+              child: ListView.builder(
+            itemCount: products.length,
+            itemBuilder: (BuildContext context, int index) {
+              return ListTile(
+                // contentPadding: EdgeInsets.only(bottom: 0.0),
+                title: Text(products[index].name),
+                subtitle: Text(
+                    '${products[index].brand} ${products[index].quantity}'),
+                isThreeLine: true,
 
-            trailing: SingleChildScrollView(
-                child: SizedBox(
-                    width: 180,
-                    child: Column(mainAxisSize: MainAxisSize.min, children: [
-                      Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(
-                              'S/ ${products[index].price.toStringAsFixed(2)}',
-                            )
-                          ]),
-                      Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Visibility(
-                            visible: !productsCart.any(
-                                (objeto) => objeto.id == products[index].id),
-                            child: Row(children: [
-                              IconButton(
-                                icon: const Icon(Icons.remove),
-                                onPressed: () {
-                                  decrementValue(products[index].id);
-                                },
+                trailing: SingleChildScrollView(
+                    child: SizedBox(
+                        width: 180,
+                        child:
+                            Column(mainAxisSize: MainAxisSize.min, children: [
+                          Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text(
+                                  'S/ ${products[index].price.toStringAsFixed(2)}',
+                                )
+                              ]),
+                          Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Visibility(
+                                visible: !productsCart.any((objeto) =>
+                                    objeto.id == products[index].id),
+                                child: Row(children: [
+                                  IconButton(
+                                    icon: const Icon(Icons.remove),
+                                    onPressed: () {
+                                      decrementValue(products[index].id);
+                                    },
+                                  ),
+                                  SizedBox(
+                                    width: 30,
+                                    child: Center(
+                                        child: Text(
+                                      products[index].inCar.toString(),
+                                    )),
+                                  ),
+                                  IconButton(
+                                    icon: const Icon(Icons.add),
+                                    onPressed: () {
+                                      incrementValue(products[index].id);
+                                    },
+                                  ),
+                                ]),
                               ),
-                              SizedBox(
-                                width: 30,
-                                child: Center(
-                                    child: Text(
-                                  products[index].inCar.toString(),
-                                )),
-                              ),
-                              IconButton(
-                                icon: const Icon(Icons.add),
-                                onPressed: () {
-                                  incrementValue(products[index].id);
-                                },
-                              ),
-                            ]),
-                          ),
-                          Visibility(
-                              visible: !productsCart.any(
-                                  (objeto) => objeto.id == products[index].id),
-                              child: ElevatedButton(
-                                onPressed: () {
-                                  addCart(products[index].id);
-                                },
-                                style: ElevatedButton.styleFrom(
-                                  backgroundColor: Colors.green,
-                                  minimumSize: const Size(30, 30),
-                                ),
-                                child:
-                                    const Icon(Icons.shopping_cart, size: 15.0),
-                              )),
-                          Visibility(
-                              visible: productsCart.any(
-                                  (objeto) => objeto.id == products[index].id),
-                              child: Text(products[index].inCar.toString(),
-                                  style: const TextStyle(
-                                      color: Colors.black,
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.bold,
-                                      fontStyle: FontStyle.italic,
-                                      letterSpacing: 2.0,
-                                      wordSpacing: 5.0,
-                                      backgroundColor:
-                                          Color.fromARGB(209, 204, 202, 202)))),
-                        ],
-                      )
-                    ]))),
-          );
-        },
-      )),
+                              Visibility(
+                                  visible: !productsCart.any((objeto) =>
+                                      objeto.id == products[index].id),
+                                  child: ElevatedButton(
+                                    onPressed: () {
+                                      addCart(products[index].id);
+                                    },
+                                    style: ElevatedButton.styleFrom(
+                                      backgroundColor: Colors.green,
+                                      minimumSize: const Size(30, 30),
+                                    ),
+                                    child: const Icon(
+                                        Icons.shopping_cart_checkout,
+                                        size: 15.0),
+                                  )),
+                              Visibility(
+                                  visible: productsCart.any((objeto) =>
+                                      objeto.id == products[index].id),
+                                  child: Text(products[index].inCar.toString(),
+                                      style: const TextStyle(
+                                          color: Colors.black,
+                                          fontSize: 20,
+                                          fontWeight: FontWeight.bold,
+                                          fontStyle: FontStyle.italic,
+                                          letterSpacing: 2.0,
+                                          wordSpacing: 5.0,
+                                          backgroundColor: Color.fromARGB(
+                                              209, 204, 202, 202)))),
+                            ],
+                          )
+                        ]))),
+              );
+            },
+          ))),
       ElevatedButton(
         onPressed: () {
           Navigator.of(context).push(
             MaterialPageRoute(
-              builder: (context) => CartProductsWidget(cart: productsCart),
+              builder: (context) => CartProductsWidget(
+                cart: productsCart,
+                updateCart: updateItemCart,
+              ),
             ),
           );
         },
