@@ -46,13 +46,13 @@ class CartProductsWidgetState extends State<CartProductsWidget> {
                 });
 
                 Navigator.of(context).pop();
-                Navigator.of(context).pop(); // Cierra la alerta
+                Navigator.of(context).pop();
               },
             ),
             TextButton(
               child: const Text('No'),
               onPressed: () {
-                return Navigator.of(context).pop(); // Cierra la alerta
+                return Navigator.of(context).pop();
               },
             ),
           ],
@@ -85,11 +85,9 @@ class CartProductsWidgetState extends State<CartProductsWidget> {
           itemCount: productsCart.length,
           itemBuilder: (BuildContext context, int index) {
             return ListTile(
-              // contentPadding: EdgeInsets.only(bottom: 0.0),
               title: Text(productsCart[index].name),
               subtitle: Text(
                   '${productsCart[index].brand} ${productsCart[index].quantity}'),
-
               trailing: SingleChildScrollView(
                   child: SizedBox(
                       width: 100,
@@ -113,22 +111,19 @@ class CartProductsWidgetState extends State<CartProductsWidget> {
             );
           },
           separatorBuilder: (BuildContext context, int index) {
-            // Construye el separador entre elementos
             return const Divider(
-              height:
-                  2, // Personaliza la altura del separador según tus necesidades
+              height: 2,
               color: Colors.grey,
             );
           },
         )),
         const Divider(
-          color:
-              Colors.blue, // Cambia el color de la línea según tus preferencias
-          thickness: 2.0, // Cambia el grosor de la línea según tus preferencias
+          color: Colors.blue,
+          thickness: 2.0,
         ),
         Row(
           children: [
-            const SizedBox(width: 50.0),
+            const SizedBox(width: 25.0),
             const Text('TOTAL',
                 style: TextStyle(
                   fontSize: 25,
@@ -141,9 +136,8 @@ class CartProductsWidgetState extends State<CartProductsWidget> {
           ],
         ),
         const Divider(
-          color:
-              Colors.blue, // Cambia el color de la línea según tus preferencias
-          thickness: 2.0, // Cambia el grosor de la línea según tus preferencias
+          color: Colors.blue,
+          thickness: 2.0,
         ),
       ]),
     );

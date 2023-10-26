@@ -108,7 +108,7 @@ class ProductListWidgetState extends State<ProductListWidget> {
                     TextButton(
                       child: const Text('OK'),
                       onPressed: () {
-                        Navigator.of(context).pop(); // Cierra la alerta
+                        Navigator.of(context).pop();
                       },
                     ),
                   ],
@@ -140,12 +140,10 @@ class ProductListWidgetState extends State<ProductListWidget> {
         itemCount: products.length,
         itemBuilder: (BuildContext context, int index) {
           return ListTile(
-            // contentPadding: EdgeInsets.only(bottom: 0.0),
             title: Text(products[index].name),
             subtitle:
                 Text('${products[index].brand} ${products[index].quantity}'),
             isThreeLine: true,
-
             trailing: SingleChildScrollView(
                 child: SizedBox(
                     width: 180,
@@ -218,9 +216,8 @@ class ProductListWidgetState extends State<ProductListWidget> {
         },
       )),
       const Divider(
-        color:
-            Colors.green, // Cambia el color de la línea según tus preferencias
-        thickness: 2.0, // Cambia el grosor de la línea según tus preferencias
+        color: Colors.green,
+        thickness: 2.0,
       ),
       ElevatedButton(
           onPressed: () {
@@ -239,9 +236,8 @@ class ProductListWidgetState extends State<ProductListWidget> {
           ),
           child: const Icon(Icons.shopping_cart, size: 20.0)),
       const Divider(
-        color:
-            Colors.green, // Cambia el color de la línea según tus preferencias
-        thickness: 2.0, // Cambia el grosor de la línea según tus preferencias
+        color: Colors.green,
+        thickness: 2.0,
       ),
     ]);
   }

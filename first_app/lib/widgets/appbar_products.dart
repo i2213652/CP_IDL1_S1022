@@ -33,7 +33,7 @@ class AppBarProducts extends StatelessWidget {
               ],
             ),
           ),
-          Expanded(
+          const Expanded(
             child: ProductListWidget(),
           ),
         ],
