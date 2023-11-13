@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:first_app/products/models/product_model.dart';
 
-import 'package:http/http.dart' as http;
-import 'dart:convert';
+import 'package:first_app/products/services/api_products_service.dart';
+import 'package:http/src/client.dart';
 
 class ProductsListWidget extends StatefulWidget {
   const ProductsListWidget({Key? key}) : super(key: key);
@@ -14,10 +14,13 @@ class ProductsListWidget extends StatefulWidget {
 class ProductsListWidgetState extends State<ProductsListWidget> {
   List<ProductModel> products = [];
   List<ProductModel> productsCart = [];
+  late APIProductService apiService;
 
   @override
   void initState() {
     super.initState();
+    apiService = APIProductService('https://shop-api-roan.vercel.app'
+        as Client); // Replace with your API base URL
     fetchData();
   }
 
@@ -27,14 +30,35 @@ class ProductsListWidgetState extends State<ProductsListWidget> {
   }
 
   Future<void> fetchData() async {
-    final response =
-        await http.get(Uri.parse('https://shop-api-roan.vercel.app/product'));
+    // if (response.statusCode == 200) {
+    //   setState(() {
+    //     List<dynamic> jsonData = json.decode(response.body);
 
-    if (response.statusCode == 200) {
+    //     products = jsonData.map((data) {
+    //       return ProductModel(
+    //         id: data['id'],
+    //         name: data['name'],
+    //         brand: data['description'],
+    //         quantity: '',
+    //         price: double.parse(data['price'].toString()),
+    //         img: '',
+    //         stock: data['stock'],
+    //         inCar: 0,
+    //       );
+    //     }).toList();
+    //   });
+    // } else {
+    //   // Si la solicitud no es exitosa, maneja el error
+    //   setState(() {
+    //     products = [];
+    //   });
+    // }
+
+    try {
+      List<dynamic> fetchedProducts = await apiService.getProducts(null);
+
       setState(() {
-        List<dynamic> jsonData = json.decode(response.body);
-
-        products = jsonData.map((data) {
+        products = fetchedProducts.map((data) {
           return ProductModel(
             id: data['id'],
             name: data['name'],
@@ -47,11 +71,8 @@ class ProductsListWidgetState extends State<ProductsListWidget> {
           );
         }).toList();
       });
-    } else {
-      // Si la solicitud no es exitosa, maneja el error
-      setState(() {
-        products = [];
-      });
+    } catch (e) {
+      print('Error fetching data: $e');
     }
   }
 
