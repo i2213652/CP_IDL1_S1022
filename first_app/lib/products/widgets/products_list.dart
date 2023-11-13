@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:first_app/products/models/product.dart';
+import 'package:first_app/products/models/product_model.dart';
 
 import 'package:http/http.dart' as http;
 import 'dart:convert';
@@ -12,8 +12,8 @@ class ProductsListWidget extends StatefulWidget {
 }
 
 class ProductsListWidgetState extends State<ProductsListWidget> {
-  List<Product> products = [];
-  List<Product> productsCart = [];
+  List<ProductModel> products = [];
+  List<ProductModel> productsCart = [];
 
   @override
   void initState() {
@@ -35,7 +35,7 @@ class ProductsListWidgetState extends State<ProductsListWidget> {
         List<dynamic> jsonData = json.decode(response.body);
 
         products = jsonData.map((data) {
-          return Product(
+          return ProductModel(
             id: data['id'],
             name: data['name'],
             brand: data['description'],

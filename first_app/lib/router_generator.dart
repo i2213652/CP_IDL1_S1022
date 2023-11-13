@@ -1,4 +1,4 @@
-import 'package:first_app/products/models/product.dart';
+import 'package:first_app/products/models/product_model.dart';
 import 'package:flutter/material.dart';
 
 import 'package:first_app/products/pages/cart_page.dart';
@@ -11,7 +11,7 @@ class RouterGenerator {
       case '/':
         return MaterialPageRoute(builder: (_) => const Home());
       case '/cart':
-        if (arguments is List<Product>) {
+        if (arguments is List<ProductModel>) {
           return MaterialPageRoute(
               builder: (_) => CartPage(products: arguments));
         } else {

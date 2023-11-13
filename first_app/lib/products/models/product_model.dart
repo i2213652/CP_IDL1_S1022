@@ -1,4 +1,4 @@
-class Product {
+class ProductModel {
   String id;
   String name;
   String brand;
@@ -8,7 +8,7 @@ class Product {
   int stock;
   int inCar;
 
-  Product(
+  ProductModel(
       {required this.id,
       required this.name,
       required this.brand,
@@ -21,5 +21,19 @@ class Product {
   @override
   String toString() {
     return 'Product{id: $id, name: $name,brand: $brand,quantity: $quantity,price: $price, img:$img,stock:$stock,inCar:$inCar}';
+  }
+
+  // Factory constructor
+  factory ProductModel.fromJson(Map<String, dynamic> json) {
+    return ProductModel(
+      id: json['id'] ?? 0,
+      name: json['name'] ?? '',
+      brand: json['brand'] ?? '',
+      quantity: json['quantity'] ?? 0,
+      price: json['price'] ?? 0.0,
+      img: json['img'] ?? '',
+      stock: json['stock'] ?? 0,
+      inCar: json['inCar'] ?? false,
+    );
   }
 }
