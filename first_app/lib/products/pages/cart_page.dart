@@ -1,26 +1,26 @@
 import 'package:flutter/material.dart';
-import 'package:first_app/models/product.dart';
+import 'package:first_app/products/models/product.dart';
+import 'package:first_app/products/widgets/products_cart.dart';
 
-class CartProductsWidget extends StatefulWidget {
-  final List<Product> cart;
-  final Function(List<Product>) updateCart;
+class CartPage extends StatefulWidget {
+  final List<Product>? products;
 
-  const CartProductsWidget(
-      {Key? key, required this.cart, required this.updateCart})
-      : super(key: key);
+  const CartPage({required this.products, Key? key}) : super(key: key);
 
   @override
-  CartProductsWidgetState createState() => CartProductsWidgetState();
+  State<CartPage> createState() {
+    return _CartPageState();
+  }
 }
 
-class CartProductsWidgetState extends State<CartProductsWidget> {
+class _CartPageState extends State<CartPage> {
   List<Product> productsCart = [];
   double total = 0;
 
   @override
   void initState() {
     super.initState();
-    productsCart.addAll(widget.cart);
+    productsCart.addAll(widget.products as Iterable<Product>);
 
     for (var element in productsCart) {
       var subtotal = element.inCar * element.price;
@@ -42,11 +42,8 @@ class CartProductsWidgetState extends State<CartProductsWidget> {
                 setState(() {
                   productsCart = [];
                   total = 0;
-                  widget.updateCart(productsCart);
                 });
-
-                Navigator.of(context).pop();
-                Navigator.of(context).pop();
+                Navigator.of(context).pushNamed('/');
               },
             ),
             TextButton(
@@ -71,15 +68,14 @@ class CartProductsWidgetState extends State<CartProductsWidget> {
         Visibility(
             visible: productsCart.isNotEmpty,
             child: ElevatedButton(
-              onPressed: () {
-                deleteAll();
-              },
-              child: Text('Eliminar todo'),
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.red,
-                minimumSize: Size(80, 20),
-              ),
-            )),
+                onPressed: () {
+                  deleteAll();
+                },
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.red,
+                  minimumSize: Size(80, 20),
+                ),
+                child: const Text('Eliminar todo'))),
         Expanded(
             child: ListView.separated(
           itemCount: productsCart.length,

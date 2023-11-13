@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:first_app/widgets/appbar_products.dart';
+import 'package:first_app/products/pages/home_page.dart';
+import 'package:first_app/router_generator.dart';
 
 void main() => runApp(const MyApp());
 
@@ -9,11 +10,13 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      initialRoute: '/',
+      onGenerateRoute: RouterGenerator.generateRoute,
       title: 'JSON ListView Example',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: AppBarProducts(),
+      home: const Home(),
     );
   }
 }

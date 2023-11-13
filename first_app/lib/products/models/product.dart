@@ -18,16 +18,8 @@ class Product {
       required this.stock,
       required this.inCar});
 
-  factory Product.fromJson(Map<String, dynamic> json) {
-    return Product(
-      id: '',
-      name: '',
-      brand: '',
-      quantity: '',
-      price: 0,
-      img: '',
-      stock: 0,
-      inCar: 0,
-    );
+  @override
+  String toString() {
+    return 'Product{id: $id, name: $name,brand: $brand,quantity: $quantity,price: $price, img:$img,stock:$stock,inCar:$inCar}';
   }
 }

@@ -1,7 +1,21 @@
 import 'package:flutter/material.dart';
-import 'package:first_app/widgets/listview_products.dart';
+import 'package:first_app/products/widgets/products_list.dart';
 
-class AppBarProducts extends StatelessWidget {
+class Home extends StatefulWidget {
+  const Home({Key? key}) : super(key: key);
+
+  @override
+  State<Home> createState() {
+    return _HomeState();
+  }
+}
+
+class _HomeState extends State<Home> {
+  @override
+  void initState() {
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -34,7 +48,7 @@ class AppBarProducts extends StatelessWidget {
             ),
           ),
           const Expanded(
-            child: ProductListWidget(),
+            child: ProductsListWidget(),
           ),
         ],
       ),

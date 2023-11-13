@@ -1,35 +1,29 @@
 import 'package:flutter/material.dart';
-import 'package:first_app/models/product.dart';
-import 'package:first_app/widgets/cart_products.dart';
+import 'package:first_app/products/models/product.dart';
 
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
-class ProductListWidget extends StatefulWidget {
-  const ProductListWidget({
-    Key? key,
-  }) : super(key: key);
+class ProductsListWidget extends StatefulWidget {
+  const ProductsListWidget({Key? key}) : super(key: key);
 
   @override
-  ProductListWidgetState createState() => ProductListWidgetState();
+  ProductsListWidgetState createState() => ProductsListWidgetState();
 }
 
-class ProductListWidgetState extends State<ProductListWidget> {
+class ProductsListWidgetState extends State<ProductsListWidget> {
   List<Product> products = [];
   List<Product> productsCart = [];
 
   @override
   void initState() {
     super.initState();
-
     fetchData();
+  }
 
-    // fetchItems().then((products) {
-    //   setState(() {
-
-    //     this.products = products;
-    //   });
-    // });
+  _navigateToCart(BuildContext context) {
+    // Navigator.of(context).pushNamed('/detail', arguments: );
+    Navigator.of(context).pushNamed('/cart', arguments: productsCart);
   }
 
   Future<void> fetchData() async {
@@ -123,15 +117,6 @@ class ProductListWidgetState extends State<ProductListWidget> {
     });
   }
 
-  void updateItemCart(List<Product> updatedCart) {
-    setState(() {
-      productsCart = updatedCart;
-      for (var element in products) {
-        element.inCar = 0;
-      }
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return Column(children: <Widget>[
@@ -221,14 +206,7 @@ class ProductListWidgetState extends State<ProductListWidget> {
       ),
       ElevatedButton(
           onPressed: () {
-            Navigator.of(context).push(
-              MaterialPageRoute(
-                builder: (context) => CartProductsWidget(
-                  cart: productsCart,
-                  updateCart: updateItemCart,
-                ),
-              ),
-            );
+            _navigateToCart(context);
           },
           style: ElevatedButton.styleFrom(
             backgroundColor: Colors.green,
