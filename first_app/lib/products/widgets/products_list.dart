@@ -25,8 +25,28 @@ class ProductsListWidgetState extends State<ProductsListWidget> {
   }
 
   _navigateToCart(BuildContext context) {
-    // Navigator.of(context).pushNamed('/detail', arguments: );
-    Navigator.of(context).pushNamed('/cart', arguments: productsCart);
+    if (productsCart.isNotEmpty) {
+      Navigator.of(context).pushNamed('/cart', arguments: productsCart);
+    } else {
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: const Text('¡Ups!'),
+            content:
+                const Text('Debes agregar al menos un producto al carrito'),
+            actions: <Widget>[
+              TextButton(
+                child: const Text('OK'),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+            ],
+          );
+        },
+      );
+    }
   }
 
   Future<void> fetchData() async {

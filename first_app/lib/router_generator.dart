@@ -17,6 +17,7 @@ class RouterGenerator {
         } else {
           return _errorRoute();
         }
+
       default:
         return _errorRoute();
     }

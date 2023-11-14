@@ -1,5 +1,7 @@
+import 'package:first_app/products/common_components/modal_view.dart';
 import 'package:flutter/material.dart';
 import 'package:first_app/products/models/product_model.dart';
+import 'products_payment.dart';
 
 class ProductsCartWidget extends StatefulWidget {
   final List<ProductModel>? products;
@@ -60,17 +62,15 @@ class ProductsCartWidgetState extends State<ProductsCartWidget> {
   Widget build(BuildContext context) {
     return Scaffold(
         body: Column(children: <Widget>[
-      Visibility(
-          visible: productsCart.isNotEmpty,
-          child: ElevatedButton(
-              onPressed: () {
-                deleteAll();
-              },
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.red,
-                minimumSize: Size(80, 20),
-              ),
-              child: const Text('Eliminar todo'))),
+      ElevatedButton(
+          onPressed: () {
+            deleteAll();
+          },
+          style: ElevatedButton.styleFrom(
+            backgroundColor: Colors.red,
+            minimumSize: Size(80, 20),
+          ),
+          child: const Text('Eliminar todo')),
       Expanded(
           child: ListView.separated(
         itemCount: productsCart.length,
@@ -129,6 +129,18 @@ class ProductsCartWidgetState extends State<ProductsCartWidget> {
       const Divider(
         color: Colors.blue,
         thickness: 2.0,
+      ),
+      ElevatedButton(
+        onPressed: () {
+          // Handle button press
+          showDialog(
+            context: context,
+            builder: (BuildContext context) {
+              return const ModalView(formWidget: ProductPaymentWidget());
+            },
+          );
+        },
+        child: const Text('PAGAR'),
       ),
     ]));
   }
