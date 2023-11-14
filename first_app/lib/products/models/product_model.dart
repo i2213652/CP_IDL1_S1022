@@ -26,14 +26,14 @@ class ProductModel {
   // Factory constructor
   factory ProductModel.fromJson(Map<String, dynamic> json) {
     return ProductModel(
-      id: json['id'] ?? 0,
+      id: json['id'] ?? '',
       name: json['name'] ?? '',
       brand: json['brand'] ?? '',
-      quantity: json['quantity'] ?? 0,
-      price: json['price'] ?? 0.0,
+      quantity: json['quantity'] ?? '',
+      price: double.parse(json['price'].toString()),
       img: json['img'] ?? '',
       stock: json['stock'] ?? 0,
-      inCar: json['inCar'] ?? false,
+      inCar: json['inCar'] ?? 0,
     );
   }
 }

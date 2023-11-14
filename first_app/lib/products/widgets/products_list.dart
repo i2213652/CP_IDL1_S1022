@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:first_app/products/models/product_model.dart';
 
 import 'package:first_app/products/services/api_products_service.dart';
-import 'package:http/src/client.dart';
+import 'package:first_app/products/models/error_service_model.dart';
+import 'package:http/http.dart';
 
 class ProductsListWidget extends StatefulWidget {
   const ProductsListWidget({Key? key}) : super(key: key);
@@ -19,8 +20,7 @@ class ProductsListWidgetState extends State<ProductsListWidget> {
   @override
   void initState() {
     super.initState();
-    apiService = APIProductService('https://shop-api-roan.vercel.app'
-        as Client); // Replace with your API base URL
+    apiService = APIProductService(Client());
     fetchData();
   }
 
@@ -30,49 +30,14 @@ class ProductsListWidgetState extends State<ProductsListWidget> {
   }
 
   Future<void> fetchData() async {
-    // if (response.statusCode == 200) {
-    //   setState(() {
-    //     List<dynamic> jsonData = json.decode(response.body);
+    var response = await apiService.getProducts(null);
 
-    //     products = jsonData.map((data) {
-    //       return ProductModel(
-    //         id: data['id'],
-    //         name: data['name'],
-    //         brand: data['description'],
-    //         quantity: '',
-    //         price: double.parse(data['price'].toString()),
-    //         img: '',
-    //         stock: data['stock'],
-    //         inCar: 0,
-    //       );
-    //     }).toList();
-    //   });
-    // } else {
-    //   // Si la solicitud no es exitosa, maneja el error
-    //   setState(() {
-    //     products = [];
-    //   });
-    // }
-
-    try {
-      List<dynamic> fetchedProducts = await apiService.getProducts(null);
-
+    if (response is List<ProductModel>) {
       setState(() {
-        products = fetchedProducts.map((data) {
-          return ProductModel(
-            id: data['id'],
-            name: data['name'],
-            brand: data['description'],
-            quantity: '',
-            price: double.parse(data['price'].toString()),
-            img: '',
-            stock: data['stock'],
-            inCar: 0,
-          );
-        }).toList();
+        products = response;
       });
-    } catch (e) {
-      print('Error fetching data: $e');
+    } else if (response is ErrorServiceModel) {
+      print(response);
     }
   }
 

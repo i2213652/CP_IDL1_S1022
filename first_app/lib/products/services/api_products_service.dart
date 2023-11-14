@@ -20,9 +20,11 @@ class APIProductService with UriMixin implements IProductService {
   @override
   Future<List<Object>> getProducts(Map<String, dynamic>? queries) async {
     try {
-      final response = await http.get(Uri.parse('$client/product'));
+      final url = getUri('product');
+      var response = await http.get(url);
 
       final List<dynamic> jsonList = json.decode(response.body);
+
       return jsonList.map((item) => ProductModel.fromJson(item)).toList();
     } on ArgumentError {
       throw ErrorServiceModel(kParseError);
