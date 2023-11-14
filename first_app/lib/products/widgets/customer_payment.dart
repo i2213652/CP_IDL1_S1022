@@ -1,15 +1,17 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:first_app/products/common_components/modal_view.dart';
+import 'message_payment.dart';
 
-class ProductPaymentWidget extends StatefulWidget {
-  const ProductPaymentWidget({Key? key}) : super(key: key);
+class CustomerPaymentWidget extends StatefulWidget {
+  const CustomerPaymentWidget({Key? key}) : super(key: key);
 
   @override
-  ProductPaymentWidgetState createState() => ProductPaymentWidgetState();
+  CustomerPaymentWidgetState createState() => CustomerPaymentWidgetState();
 }
 
-class ProductPaymentWidgetState extends State<ProductPaymentWidget> {
+class CustomerPaymentWidgetState extends State<CustomerPaymentWidget> {
   String selectedOption = 'Efectivo';
   TextEditingController textEditingController = TextEditingController();
 
@@ -32,7 +34,7 @@ class ProductPaymentWidgetState extends State<ProductPaymentWidget> {
   Widget build(BuildContext context) {
     // Your widget code here
     return Padding(
-      padding: const EdgeInsets.all(16.0),
+      padding: const EdgeInsets.all(8.0),
       child: Column(
         children: [
           const Text(
@@ -102,9 +104,12 @@ class ProductPaymentWidgetState extends State<ProductPaymentWidget> {
           const SizedBox(height: 50.0),
           ElevatedButton(
             onPressed: () {
-              // Access the selected option and input text here
-              print('Selected Option: $selectedOption');
-              print('Input Text: ${textEditingController.text}');
+              showDialog(
+                context: context,
+                builder: (BuildContext context) {
+                  return const ModalView(formWidget: MessagePaymentWidget());
+                },
+              );
             },
             child: Text('COMPRAR'),
             style: ElevatedButton.styleFrom(

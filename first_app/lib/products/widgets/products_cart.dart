@@ -1,7 +1,7 @@
 import 'package:first_app/products/common_components/modal_view.dart';
 import 'package:flutter/material.dart';
 import 'package:first_app/products/models/product_model.dart';
-import 'products_payment.dart';
+import 'customer_payment.dart';
 
 class ProductsCartWidget extends StatefulWidget {
   final List<ProductModel>? products;
@@ -136,7 +136,7 @@ class ProductsCartWidgetState extends State<ProductsCartWidget> {
           showDialog(
             context: context,
             builder: (BuildContext context) {
-              return const ModalView(formWidget: ProductPaymentWidget());
+              return const ModalView(formWidget: CustomerPaymentWidget());
             },
           );
         },
